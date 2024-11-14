@@ -7,7 +7,7 @@ body {
     max-width: calc(1128px + 24px + 24px + 24px + 24px);
     padding: 48px;
     margin: 0 auto;
-    
+    margin-top: 20px;
 }
 
 
@@ -32,18 +32,13 @@ ul {
     justify-content: center;
 }
 
-.gallery-item{
+.gallery-image {
     width: 360px;
     height: 200px;
-}
-
-
-.gallery-img {
-    height: 100%;
     object-fit: cover;
     cursor: pointer;
+    
     transition: all 0.3s ease;
-
 }
 
 .gallery-img:hover,
