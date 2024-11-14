@@ -68,23 +68,28 @@ const images = [
 const galleryContainer = document.querySelector('.gallery');
 
 const displayImages = () => {
-    images.forEach(img => { 
-        const galleryImg = document.createElement('img'); 
-        galleryImg.className = "gallery-img";
-        galleryImg.src = img.preview;
-        galleryImg.alt = img.description
-        galleryImg.width = "360";
-        
-
-        const galleryItem = document.createElement('li'); 
-        galleryItem.className = 'gallery-item';
-
-        galleryItem.appendChild(galleryImg);
-        galleryContainer.appendChild(galleryItem);
-    })
+    const galleryItems = images.map(({ preview, original, description }) => {
+        return `
+        <li class="gallery-item">
+            <a class="gallery-link" href="${original}">
+                <img
+                    class="gallery-image"
+                    src="${preview}"
+                    data-source="${original}"
+                    alt="${description}"
+                />
+            </a>
+        </li>
+        `;             
+        }).join("");
+    galleryContainer.insertAdjacentHTML('beforeend', galleryItems);
 };
 
+
+
+
 galleryContainer.addEventListener('click', event => {
+    event.preventDefault();
     const clickedImageDescription = event.target.alt;
 
     if (event.target.nodeName === 'IMG') {
@@ -95,16 +100,8 @@ galleryContainer.addEventListener('click', event => {
         const instance = basicLightbox.create(`
             <img width="1280" src=${clickedImageObject.original} alt=${clickedImageObject.description}>
         `)
-
         instance.show() 
     }
-
-    
 })
 
 displayImages()
-
-
-
-
-
